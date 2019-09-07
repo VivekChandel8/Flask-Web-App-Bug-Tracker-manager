@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/new.css') }}">
+     <title>BUG_TRACKER</title>
+
+    <script>
+function goBack() {
+  window.history.back();
+}
+</script>
+</head>
+<body>
+
+<header class="header">
+		<h1 class="logo"><a href="#">BUG_TRACKER</a></h1>
+      <ul class="main-nav">
+          <li><a href="/adminpanel">Home</a></li>
+          <li><a href="/bugpage">View Bugs</a></li>
+          <li><a href="#">Hi !!! {{session['admin']}}</a></li>
+          <li><a href="#"><form  action="/logout" method="post">
+						   <button type="submit"  id="btn">logout</button>
+					   </form></a></a></li>
+      </ul>
+	</header>
+<hr>
+ {% for k in get_flashed_messages() %}
+    <div align="center">
+        <font color="black">{{ k }}</font>
+    </div>
+    {% endfor %}
+<div class="container">
+
+  <form action="{{ url_for('addbug') }}" method="post" enctype="multipart/form-data">
+ <div class="row">
+           <div class="col-25">
+               <label for="lname"><font color="white">Project Name</font></label>
+           </div>
+               <div class="col-75">
+         <input type="text" id="projectname" name="project" placeholder="Name of Project....">
+          </div>
+
+
+         </div>
+
+
+
+      <div class="row">
+        <div class="col-25">
+            <label for="country"><font color="white">Status</font></label>
+                           </div>
+          <div class="col-75">
+           <select id="status" name="Status">
+             <option value="Open">Open</option>
+             <option value="Reopen">Reopen</option>
+             <option value="New">New</option>
+             <option value="Closed">Closed</option>
+             <option value="Approved">Approved</option>
+            </select>
+          </div>
+
+      </div>
+
+
+          <div class="row">
+    <div class="col-25">
+        <label for="country"><font color="white">Assign to</font></label>
+    </div>
+    <div class="col-75">
+      <select id="Assignto" name="Assignto">
+          {% for i in data %}
+        <option value="{{i.uname}}">{{i.uname}}</option>
+          {% endfor %}
+      </select>
+    </div>
+          </div>
+  <div class="row">
+    <div class="col-25">
+        <label for="country"><font color="white">Severity</font></label>
+    </div>
+    <div class="col-75">
+      <select id="country" name="Severity">
+        <option value="P0">P0</option>
+        <option value="P1">P1</option>
+        <option value="P2">P2</option>
+          <option value="Enhancement">Enhancement</option>
+      </select>
+    </div>
+  </div>
+
+         <div class="row">
+           <div class="col-25">
+               <label for="lname"><font color="white">Title of bug</font></label>
+           </div>
+         <div class="col-75">
+         <input type="text" id="lname" name="Title" placeholder="Title of your bug....">
+          </div>
+         </div>
+
+         <div class="row">
+          <div class="col-25">
+              <label for="subject"><font color="white">Description of bug</font></label>
+           </div>
+         <div class="col-75">
+         <textarea id="subject" name="Writedescription" placeholder="Write description og bug......" style="height:200px"></textarea>
+         </div>
+       </div>
+         <input type="hidden" id="postedby" name="postedby" value="{{session['admin']}}">
+              <div class="file-drop-area">
+  <span class="fake-btn">Choose files</span>
+  <span class="file-msg">or drag and drop files here</span>
+  <input class="file-input" type="file" name="file[]" multiple required>
+</div>
+
+  <div class="row" align="">
+    <input type="submit" value="Submit">
+  </div>
+
+
+</div>
+              <div align="center">
+                  <p><font color="white">Copyright ©2019 All rights reserved | Cherub Software PVT. LTD</font></p>
+              </div>
+              <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="{{ url_for('static',filename='vendor/jquery/new.js') }}"></script>
+</body>
+</html>

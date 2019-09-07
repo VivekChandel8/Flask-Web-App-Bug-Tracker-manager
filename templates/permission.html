@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body %}
+   <div  align="center">
+
+    {% if data|length == 0 %}
+    <p>There is no user in your database, Please add a user by <a href="/adduser">Clicking here</a></p>
+    {% else %}
+        <p>These are the user in your database.</p>
+    {% endif %}
+
+    {% for r in data %}
+        <p align="center">
+          <form action="/changepermission" method="post">
+            {{ r.uname }} &nbsp; User is currently {{r.status}}
+            {% if "enable" in r.status %}
+            <input type="hidden" value="{{r.uid}}" name="hiddendata">
+            <input type="checkbox" name="getdata" value="disabled" onChange="this.form.submit()">Disable
+            </form>
+            {% elif "disable" in r.status %}
+            <form action="/changepermission" method="post">
+                <input type="hidden" value="{{r.uid}}" name="hiddendata">
+            <input type="checkbox"  name="getdata" value="enabled" onChange="this.form.submit()">Enable &nbsp;
+            </form>
+            {% endif %}
+
+        </p>
+    {% endfor %}
+    </form>
+</div>
+
+
+{% endblock %}d

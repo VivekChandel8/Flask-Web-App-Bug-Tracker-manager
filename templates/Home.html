@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome::BUG_TRACKER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/home.css') }}">
+</head>
+<body>
+<div class="background">
+ <div class="container">
+  <div class="row flex-column justify-content-center align-items-center text-center">
+   <div class="col-sm-12 col-md-10 col-lg-8">
+    <h1 id="time">12:00 AM</h1>
+    <h3 id="day" class="display-5">Monday, January 01</h3>
+    <h2 id="greeting">Good Morning</h2>
+       <h2>Welcome to the Bug_Tracker :: <a href="http://cherubsoft.com/"><font color="white">Cherub Software</font></a></h2>
+       <a href="/adminlogin"><button class="btn-1">Login as Admin</button></a>
+       <a href="/userlogin"><button class="btn-2">Login as User</button></a>
+   </div><!-- /.col -->
+  </div>
+ </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="{{ url_for('static',filename='vendor/jquery/home.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block body %}
+<div align="center">
+    {% for h in get_flashed_messages() %}
+        <p>{{ h }}</p>
+    {% endfor %}
+
+    {% if data|length == 0 %}
+    <p>There is no user in your database, Please add a user by <a href="/adduser">Clicking here</a></p>
+    {% else %}
+        <p>These are the user in your database.</p>
+    {% endif %}
+
+    {% for l in data %}
+     <p><form action="/deleteuser" method="post">
+         {{l.uname}}
+
+         <input type="hidden" value="{{l.uid}}" name="hiddendata">&nbsp;
+         <input type="submit" value="Remove user" id="btn">
+     </form>
+        </p>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

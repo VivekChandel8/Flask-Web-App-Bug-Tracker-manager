@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+     <title>BUG_TRACKER</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static',filename='css/blog-home.css') }}" rel="stylesheet">
+   <style>
+   html {
+  overflow:   scroll;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+
+
+    #btn
+  {
+    background-color: white;
+    color: black;
+    border: 2px solid #f44336;
+  }
+
+   #btn:hover {
+    background-color: #f44336;
+    color: white;
+    }
+
+  .grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 15px;
+  text-align: center;
+}
+   </style>
+  </head>
+
+  <body>
+   {% if data|length == 0 %}
+    <hr>
+    <div align="Center"><h1>There are no Bugs...:) :)</h1></div>
+    {% endif %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">BUG_TRACKER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              </li>
+             <li class="nav-item">
+              <a class="nav-link">Hi !!! {{session['admin']}}</a>
+            </li>
+             <li class="nav-item">
+            <a class="nav-link"> <form  action="/logout" method="post">
+						  &nbsp; <button type="submit"  id="btn">logout</button>
+					   </form></a>
+             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/adminpanel">Home</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/postasadmin">Post Bug</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<div class="grid-container">
+  {% for k in data %}
+          <div  align="center" class="grid-item">
+            <h1 class="my-4">{{k.project}}&nbsp;<small>{{k.Status}}</small>
+          </h1>
+            <div class="card-body">
+              <h2 class="card-title">{{k.Title}}</h2>
+              <p class="card-text">{{k.assign}}</p>
+                <form action="/viewbugdes" method="post" id="form1{{k.id}}">
+                    <input type="hidden" name= "check" value="{{ k.id }}">
+                <a href="#" onclick="document.getElementById('form1{{k.id}}').submit();">Click here to full view</a>
+                   </form>
+            </div>
+            <div class="card-footer text-muted">
+              {{k.timenow}} by
+              {{k.postedby}}
+            </div>
+            </div>
+
+            {% endfor %}
+
+</div>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright ©2019 All rights reserved | Cherub Software PVT. LTD</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  </body>
+
+</html>

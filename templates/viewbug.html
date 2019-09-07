@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BUG_TRACKER</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static',filename='css/blog-home.css') }}" rel="stylesheet">
+   <style>
+   html {
+  overflow:   scroll;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+
+    #btn
+  {
+    background-color: white;
+    color: black;
+    border: 2px solid #f44336;
+  }
+
+   #btn:hover {
+    background-color: #f44336;
+    color: white;
+    }
+
+  .grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.buttonDownload {
+	display: inline-block;
+	position: relative;
+	padding: 10px 25px;
+
+	background-color: #4CC713;
+	color: white;
+
+	font-family: sans-serif;
+	text-decoration: none;
+	font-size: 0.9em;
+	text-align: center;
+	text-indent: 15px;
+}
+
+.buttonDownload:hover {
+	background-color: #333;
+	color: white;
+}
+
+.buttonDownload:before, .buttonDownload:after {
+	content: ' ';
+	display: block;
+	position: absolute;
+	left: 15px;
+	top: 52%;
+}
+
+/* Download box shape  */
+.buttonDownload:before {
+	width: 10px;
+	height: 2px;
+	border-style: solid;
+	border-width: 0 2px 2px;
+}
+
+/* Download arrow shape */
+.buttonDownload:after {
+	width: 0;
+	height: 0;
+	margin-left: 3px;
+	margin-top: -7px;
+
+	border-style: solid;
+	border-width: 4px 4px 0 4px;
+	border-color: transparent;
+	border-top-color: inherit;
+
+	animation: downloadArrow 2s linear infinite;
+	animation-play-state: paused;
+}
+
+.buttonDownload:hover:before {
+	border-color: #4CC713;
+}
+
+.buttonDownload:hover:after {
+	border-top-color: #4CC713;
+	animation-play-state: running;
+}
+
+/* keyframes for the download icon anim */
+@keyframes downloadArrow {
+	/* 0% and 0.001% keyframes used as a hackish way of having the button frozen on a nice looking frame by default */
+	0% {
+		margin-top: -7px;
+		opacity: 1;
+	}
+
+	0.001% {
+		margin-top: -15px;
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		margin-top: 0;
+		opacity: 0;
+	}
+}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+body {
+  background-color: grey;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+div.table-title {
+   display: block;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+}
+
+.table-title h3 {
+   color: #fafafa;
+   font-size: 30px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 320px;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+
+th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:23px;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}
+
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:16px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
+}
+
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+
+tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+
+tr:nth-child(odd):hover td {
+  background:#4E5066;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:18px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+
+
+header {
+    float: left;
+    width: 100%;
+}
+.main-containor {
+    float: left;
+    width: 100%;
+}
+footer.py-5.bg-dark {
+    float: left;
+    width: 100%;
+}
+.col-md-cont {
+    float: left;
+    width: 100%;
+}
+.col-md-con {
+    float: left;
+    width: 100%;
+}
+   </style>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">BUG_TRACKER</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              </li>
+             <li class="nav-item">
+              <a class="nav-link">Hi !!! {{session['admin']}}</a>
+            </li>
+             <li class="nav-item">
+            <a class="nav-link"> <form  action="/logout" method="post">
+						  &nbsp; <button type="submit"  id="btn">logout</button>
+					   </form></a>
+             </li>
+
+              <li class="nav-item">
+              <a class="nav-link" href="/adminpanel">Home</a></li>
+              <li class="nav-item">
+              <a class="nav-link" href="/postasadmin">Post Bug</a></li>
+              <li class="nav-item">
+              <a class="nav-link" href="/bugpage">Other Bugs</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+        </header>
+   <hr>
+    <div class="main-containor">
+<div class="container">
+    <div class="col-md-cont" align="center">
+
+      {% for k in duck %}
+<table class="table-fill">
+<tbody class="table-hover">
+<tr>
+    <td class="text-left"><b>Project Name:</b></td>
+<td class="text-left">{{k.project}}</td>
+</tr>
+<tr>
+    <td class="text-left"><b>Project Title:</b></td>
+<td class="text-left">{{k.Title}}</td>
+</tr>
+<tr>
+    <td class="text-left"><b>Assigned To:</b> </td>
+<td class="text-left">{{k.assign}}</td>
+</tr>
+<tr>
+    <td class="text-left"><b>Status:</b></td>
+    <td class="text-left">{{k.Status}}</td>
+</tr>
+<tr>
+    <td class="text-left"><b>Severity:</b></td>
+<td class="text-left">{{k.Severity}}</td>
+
+</tr>
+<tr>
+    <td class="text-left"><b>Description:</b> </td>
+<td class="text-left">{{k.Writedescription}}</td>
+</tr>
+<tr>
+    <td class="text-left"><b>Posted by:</b> </td>
+<td class="text-left">{{k.postedby}}</td>
+</tr>
+<tr>
+    <td class="text-left"><b>Posted on:</b></td>
+<td class="text-left">{{k.timenow}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+        <a href="#" class="buttonDownload" onclick="myFunction()">Click here to view attachments</a>
+    </div>
+
+
+
+
+
+    <div class="col-md-con" align="center" id="myDIV" style="display:none;">
+        <b>Click on name to download attachment.</b>
+        {% for l,k in data%}
+
+<form action="/returnfile" method="post">
+    <input type="hidden" value="{{ l}}" name="choco">
+    <p><a href="/returnfile" target="blank"><input type="submit" value="{{k}}" id="btn"></a> </p>
+    </form>
+  {% endfor %}
+    </div>
+</div>
+    </div>
+
+
+     <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright ©2019 All rights reserved | Cherub Software PVT. LTD</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+  <script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+
+  </body>
+</html>

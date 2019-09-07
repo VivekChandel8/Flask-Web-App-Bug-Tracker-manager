@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bug_Tracker :: Admin Panel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/admin.css') }}">
+    </head>
+<body>
+<div class="mydiv"><h1>Bug_Tracker :: Admin Panel</h1></div>
+<div class="navbar" >
+
+  <a href="">Email Notification</a>
+  <a href="/postasadmin">Post Bug</a>
+  <a href="/bugpage">View bugs</a>
+  <a href="/permission">Permissions</a>
+  <a href="">Alteration in submitting page</a>
+  <a href="/removeuser">Remove User</a>
+  <a href="/adduser">Add user</a>
+
+  <div class="dropdown" align="right">
+  <button class="dropbtn" onclick="myFunction()">Hi !!! {{session['admin']}}
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content" id="myDropdown">
+    <form action="/logout" method="post" id="form1">
+     <a  onclick="document.getElementById('form1').submit();">Logout</a>
+    </form>
+  </div>
+  </div>
+</div>
+<div align="center">
+<h3> Hello, {{session['admin']}} Welcome!, you have logged in as admin</h3>
+<p>You can manage your admin rights here....</p>
+</div>
+
+<script src="{{ url_for('static',filename='vendor/jquery/admin.js') }}"></script>
+
+</body>
+</html>
